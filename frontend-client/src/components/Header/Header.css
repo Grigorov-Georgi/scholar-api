@@ -1,0 +1,16 @@
+.header-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.header-image{
+    height: 5rem;
+    width: 5rem;
+}
+
+.header-text{
+    font-size: 2rem;
+}
