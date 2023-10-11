@@ -28,7 +28,7 @@ const Input = forwardRef<Partial<HTMLInputElement>, InputProps>(
     }));
     return (
       <div className={wrapperClassName}>
-        <div className={labelClassName}>{label ?? ""}</div>
+        {label ? <div className={labelClassName}>{label ?? ""}</div> : null}
         <input ref={inputRef} type={type} value={value} {...props} />
       </div>
     );
