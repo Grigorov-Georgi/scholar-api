@@ -1,12 +1,14 @@
-# Google Scholar Simple API
+# Google Scholar App
 
-## To start locally:
+## Backend setup
+
+### To start locally:
 - Check python version with `python3 --version`
 - Run following commands in the terminal
 - `pip3 install scholarly`
 - `python app.py`
 
-## To start the docker container:
+### To start the docker container:
 - Start docker daemon (just open the docker application -> daemon will start automatically)
 - Execute from the /scholar-api folder `docker build -t scholar-api .` to build an image
 - Start the container with `docker run -it -p 1914:1914 scholar-api`
