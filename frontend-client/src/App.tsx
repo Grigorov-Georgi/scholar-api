@@ -31,9 +31,9 @@ function App() {
 
   return (
     <>
+      <Header />
       {!showInfo ? (
         <>
-          <Header />
           <Input
             label="Author Name:"
             value={authorName}
