@@ -1,38 +1,42 @@
 import {useEffect, useState} from "react";
-import {Line} from "react-chartjs-2";
+import {Bar} from "react-chartjs-2";
 import {
     Chart as ChartJS,
-    LineElement,
     CategoryScale,
     LinearScale,
-    PointElement,
+    BarElement,
+    Title,
     Tooltip,
     Legend,
+} from 'chart.js';
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
     Title,
-} from "chart.js";
+    Tooltip,
+    Legend
+);
 
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend, Title);
-
-interface LineChartProps {
+interface BarChartProps {
     data: any;
 }
 
-const options = {
+export const options = {
     responsive: true,
     plugins: {
         legend: {
-            position: "top" as const,
+            position: 'top' as const,
         },
         title: {
-            display: false,
-            text: "Cites per Year",
+            display: true,
+            text: 'Chart.js Bar Chart',
         },
-        maintainAspectRatio: false,
-        aspectRatio: 1,
     },
 };
 
-const LineChart = (props: LineChartProps) => {
+const BarChart = (props: BarChartProps) => {
     const {data} = props;
 
     const [modifiedCitesPerYear, setModifiedCitesPerYear] = useState<any>(null);
@@ -64,9 +68,9 @@ const LineChart = (props: LineChartProps) => {
 
     return (
         <div>
-            { modifiedCitesPerYear ? <Line data={modifiedCitesPerYear} options={options}/> : <div>No data!</div>}
+            { modifiedCitesPerYear ? <Bar data={modifiedCitesPerYear} options={options}/> : <div>No data!</div>}
         </div>
     );
 };
 
-export default LineChart;
+export default BarChart;
