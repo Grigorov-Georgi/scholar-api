@@ -14,6 +14,7 @@ export type AuthorDataType = {
   }[];
   urlPicture: string;
   name: string;
+  error?: string;
 };
 
 export const getAuthorInformation = async (

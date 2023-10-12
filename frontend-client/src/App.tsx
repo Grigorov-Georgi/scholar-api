@@ -28,17 +28,23 @@ function App() {
     useState<AuthorDataType | null>(null);
   const [showInfo, setShowInfo] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [noAuthor, setNoAuthor] = useState(false);
 
   const fetchAuthorInfo = async () => {
     setIsLoading(true);
     await getAuthorInformation(authorName)
       .then((response) => {
-        console.log(response);
+        if (response?.error || response === null) {
+          setNoAuthor(true);
+        } else {
+          setNoAuthor(false);
+        }
         setAuthorInformation(response);
         setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
+        setNoAuthor(true);
         //TODO: TOASTS
       });
   };
@@ -71,6 +77,7 @@ function App() {
               <MoonLoader color="#8884d8" />
             </div>
           )}
+          {noAuthor && <p>Author not found!</p>}
         </>
       ) : (
         <Profile
