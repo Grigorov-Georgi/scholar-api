@@ -4,23 +4,22 @@ import Header from "./components/Header/Header";
 import Input from "./components/Input/Input";
 import { AuthorDataType, getAuthorInformation } from "./http/api_service";
 import Profile from "./components/Profile/Profile";
-import BarChart from "./components/Charts/BarChart.tsx";
 
-const data = {
-  cites_per_year: {
-    "2013": 1,
-    "2014": 6,
-    "2015": 1,
-    "2016": 7,
-    "2017": 8,
-    "2018": 15,
-    "2019": 6,
-    "2020": 20,
-    "2021": 14,
-    "2022": 11,
-    "2023": 9,
-  },
-};
+// const data = {
+//   cites_per_year: {
+//     "2013": 1,
+//     "2014": 6,
+//     "2015": 1,
+//     "2016": 7,
+//     "2017": 8,
+//     "2018": 15,
+//     "2019": 6,
+//     "2020": 20,
+//     "2021": 14,
+//     "2022": 11,
+//     "2023": 9,
+//   },
+// };
 
 function App() {
   const [authorName, setAuthorName] = useState("");
@@ -30,7 +29,10 @@ function App() {
 
   const fetchAuthorInfo = async () => {
     await getAuthorInformation(authorName)
-      .then((response) => setAuthorInformation(response))
+      .then((response) => {
+        console.log(response);
+        setAuthorInformation(response);
+      })
       .catch((err) => {
         console.log(err);
         //TODO: TOASTS
@@ -60,7 +62,6 @@ function App() {
           <button style={{ marginBottom: "4rem" }} onClick={fetchAuthorInfo}>
             Fetch
           </button>
-          <BarChart data={data} />
         </>
       ) : (
         <Profile data={authorInformation} />

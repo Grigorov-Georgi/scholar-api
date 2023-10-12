@@ -33,6 +33,7 @@ export const LineChartContainer = (props: LineChartContainerProps) => {
   };
   return (
     <>
+      <h3>Citations per year</h3>
       <LineChart
         title="Total citations per yer"
         width={400}

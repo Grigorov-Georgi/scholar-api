@@ -1,76 +1,99 @@
-import {useEffect, useState} from "react";
-import {Bar} from "react-chartjs-2";
+import { useEffect, useState } from "react";
+import { Bar } from "react-chartjs-2";
 import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js';
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
 ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
 );
 
 interface BarChartProps {
-    data: any;
+  publicationsData: { citation: string; title: string; pub_year?: string }[];
 }
 
-export const options = {
-    responsive: true,
-    plugins: {
-        legend: {
-            position: 'top' as const,
-        },
-        title: {
-            display: true,
-            text: 'Cites per Year',
-        },
+interface ModifiedData {
+  labels: string[];
+  datasets: {
+    label: string;
+    data: number[];
+    borderColor: string;
+    backgroundColor: string;
+  }[];
+}
+
+const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top" as const,
     },
+    title: {
+      display: true,
+      text: "Cites per Year",
+    },
+  },
 };
 
 const BarChart = (props: BarChartProps) => {
-    const {data} = props;
+  const { publicationsData } = props;
+  const [modifiedCitesPerYear, setModifiedCitesPerYear] =
+    useState<ModifiedData>({ labels: [], datasets: [] });
 
-    const [modifiedCitesPerYear, setModifiedCitesPerYear] = useState<any>(null);
+  const extractPubsPerYear = () => {
+    const years = publicationsData.map((entry) => entry.pub_year);
+    let count: { [key: string]: number } = {};
+    years.forEach((year) => {
+      if (year) {
+        count[year] = (count[year] || 0) + 1;
+      }
+    });
+    const noDataPubs = years.filter((year) => !year);
+    count = { ...count, "No Data": noDataPubs.length };
+    return count;
+  };
 
-    useEffect(() => {
-        if (data) {
-            const citesPerYear = Object.entries(data["cites_per_year"])
-                .map(([year, value]) => ({
-                    year,
-                    value
-                }));
+  useEffect(() => {
+    if (publicationsData) {
+      const count = extractPubsPerYear();
+      const modifiedArray: ModifiedData = {
+        labels: Object.keys(count),
+        datasets: [
+          {
+            label: "Count",
+            data: Object.values(count),
+            borderColor: "#8884d8",
+            backgroundColor: "#8884d8",
+          },
+        ],
+      };
 
-            const modifiedArray = {
-                labels: citesPerYear.map((row) => row.year),
-                datasets:
-                    [
-                        {
-                            label: "Count",
-                            data: citesPerYear.map((row) => row.value),
-                            borderColor: "rgb(138,255,99)",
-                            backgroundColor: "rgba(33,255,0,0.5)",
-                        }
-                    ]
-            };
+      setModifiedCitesPerYear(modifiedArray);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [publicationsData]);
 
-            setModifiedCitesPerYear(modifiedArray);
-        }
-    }, [data]);
-
-    return (
-        <div>
-            { modifiedCitesPerYear ? <Bar data={modifiedCitesPerYear} options={options}/> : <div>No data!</div>}
-        </div>
-    );
+  return (
+    <div>
+      <h3>Publications per year</h3>
+      {modifiedCitesPerYear ? (
+        <Bar data={modifiedCitesPerYear} options={options} />
+      ) : (
+        <div>No data!</div>
+      )}
+    </div>
+  );
 };
 
 export default BarChart;
