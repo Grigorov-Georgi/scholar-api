@@ -3,8 +3,7 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import Input from "./components/Input/Input";
 import { AuthorDataType, getAuthorInformation } from "./http/api_service";
-import Avatar from "./components/Profile/Avatar/Avatar";
-import { LineChartContainer } from "./components/LineChartContainer/LineChartContainer";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   const [authorName, setAuthorName] = useState("");
@@ -32,27 +31,31 @@ function App() {
 
   return (
     <>
-      {!showInfo ? (
-        <>
-          <Header />
-          <Input
-            label="Author Name:"
-            value={authorName}
-            onChange={(e) => setAuthorName(e.target.value)}
-            ref={firstNameInputRef}
-          />
-          <button style={{ marginBottom: "4rem" }} onClick={fetchAuthorInfo}>
-            Fetch
-          </button>
-        </>
-      ) : (
-        <>
-          <LineChartContainer
-            citesPerYear={authorInformation?.citesPerYear ?? {}}
-          />
-          <Avatar photoUrl={authorInformation?.urlPicture} />
-        </>
-      )}
+      <Header />
+      <Input
+        label="First Name:"
+        value={firstName}
+        onChange={(e) => setFirstName(e.target.value)}
+        ref={firstNameInputRef}
+      />
+      <button style={{ marginBottom: "4rem" }} onClick={fetchAuthorInfo}>
+        Fetch
+      </button>
+      <div style={{ marginBottom: ".5rem" }}>Chart with example data</div>
+      <LineChart
+        title="Example chart"
+        width={400}
+        height={400}
+        data={mockData}
+        margin={{ top: 30, right: 20, bottom: 5, left: -20 }}
+      >
+        <Line type="linear" dataKey="citesPerYear" stroke="#8884d8" />
+        <CartesianGrid stroke="#ccc" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+      </LineChart>
+      <Avatar photoUrl={authorInformation?.urlPicture} />
     </>
   );
 }
