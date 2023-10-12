@@ -8,11 +8,13 @@ import BarChart from "../Charts/BarChart";
 const Profile = (props: { data: AuthorDataType | null }) => {
   return (
     <div className="profile-wrapper">
-      <Avatar photoUrl={props.data?.urlPicture} />
-      <AuthorInformation
-        affiliation={props.data?.affiliation}
-        citedby={props.data?.citedby}
-      />
+      <div className="avatar-wrapper">
+        <Avatar photoUrl={props.data?.urlPicture} />
+        <AuthorInformation
+          affiliation={props.data?.affiliation}
+          citedby={props.data?.citedby}
+        />
+      </div>
       <div className="chartContainer">
         <LineChartContainer citesPerYear={props.data?.citesPerYear ?? {}} />
         <BarChart publicationsData={props.data?.publicationsInfo ?? []} />
