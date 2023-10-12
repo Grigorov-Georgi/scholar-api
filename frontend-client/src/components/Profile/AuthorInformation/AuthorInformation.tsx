@@ -40,7 +40,7 @@ const AuthorInformation = ({
     return <></>;
   };
   return (
-    <div className="avatar-wrapper">
+    <div className="">
       <div className="mainContainer">
         <p>
           <b>Affiliations: </b>

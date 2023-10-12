@@ -2,4 +2,18 @@
     height: 20rem;
     width: 20rem;
     border-radius: 50%;
+    
+}
+
+.avatar-wrapper{
+    display: grid;
+    flex-direction: row;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    border-radius: 15%;
+    background-color: #F5F5F5;
+    padding: 2rem;
+
 }
