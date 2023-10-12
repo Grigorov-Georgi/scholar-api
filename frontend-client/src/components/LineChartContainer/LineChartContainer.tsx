@@ -39,7 +39,7 @@ export const LineChartContainer = (props: LineChartContainerProps) => {
         width={400}
         height={400}
         data={transformCitationData(citesPerYear)}
-        margin={{ top: 30, right: 20, bottom: 5, left: -20 }}
+        margin={{ top: 30, right: 20, bottom: 5, left: 10 }}
       >
         <Line type="linear" dataKey="citations" stroke="#8884d8" />
         <CartesianGrid stroke="#ccc" />

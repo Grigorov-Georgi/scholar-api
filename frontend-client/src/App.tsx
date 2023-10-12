@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import Input from "./components/Input/Input";
 import { AuthorDataType, getAuthorInformation } from "./http/api_service";
 import Profile from "./components/Profile/Profile";
+import { MoonLoader } from "react-spinners";
 
 // const data = {
 //   cites_per_year: {
@@ -26,12 +27,15 @@ function App() {
   const [authorInformation, setAuthorInformation] =
     useState<AuthorDataType | null>(null);
   const [showInfo, setShowInfo] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchAuthorInfo = async () => {
+    setIsLoading(true);
     await getAuthorInformation(authorName)
       .then((response) => {
         console.log(response);
         setAuthorInformation(response);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -62,6 +66,11 @@ function App() {
           <button style={{ marginBottom: "4rem" }} onClick={fetchAuthorInfo}>
             Fetch
           </button>
+          {isLoading && (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <MoonLoader color="#8884d8" />
+            </div>
+          )}
         </>
       ) : (
         <Profile
