@@ -3,6 +3,7 @@ import Avatar from "./Avatar/Avatar";
 import { AuthorDataType } from "../../http/api_service";
 import "./Profile.css";
 import { LineChartContainer } from "../LineChartContainer/LineChartContainer";
+import BarChart from "../Charts/BarChart";
 
 const Profile = (props: { data: AuthorDataType | null }) => {
   return (
@@ -12,7 +13,10 @@ const Profile = (props: { data: AuthorDataType | null }) => {
         affiliation={props.data?.affiliation}
         citedby={props.data?.citedby}
       />
-      <LineChartContainer citesPerYear={props.data?.citesPerYear ?? {}} />
+      <div className="chartContainer">
+        <LineChartContainer citesPerYear={props.data?.citesPerYear ?? {}} />
+        <BarChart publicationsData={props.data?.publicationsInfo ?? []} />
+      </div>
     </div>
   );
 };

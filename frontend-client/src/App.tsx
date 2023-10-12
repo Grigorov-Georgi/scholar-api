@@ -5,6 +5,22 @@ import Input from "./components/Input/Input";
 import { AuthorDataType, getAuthorInformation } from "./http/api_service";
 import Profile from "./components/Profile/Profile";
 
+// const data = {
+//   cites_per_year: {
+//     "2013": 1,
+//     "2014": 6,
+//     "2015": 1,
+//     "2016": 7,
+//     "2017": 8,
+//     "2018": 15,
+//     "2019": 6,
+//     "2020": 20,
+//     "2021": 14,
+//     "2022": 11,
+//     "2023": 9,
+//   },
+// };
+
 function App() {
   const [authorName, setAuthorName] = useState("");
   const [authorInformation, setAuthorInformation] =
@@ -13,7 +29,10 @@ function App() {
 
   const fetchAuthorInfo = async () => {
     await getAuthorInformation(authorName)
-      .then((response) => setAuthorInformation(response))
+      .then((response) => {
+        console.log(response);
+        setAuthorInformation(response);
+      })
       .catch((err) => {
         console.log(err);
         //TODO: TOASTS

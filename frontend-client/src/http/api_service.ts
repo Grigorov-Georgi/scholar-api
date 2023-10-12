@@ -8,10 +8,10 @@ export type AuthorDataType = {
   citesPerYear: { [key: string]: number };
   interests: string[];
   publicationsInfo: {
-    pubYear: string;
     title: string;
     citation: string;
-  };
+    pubYear?: string;
+  }[];
   urlPicture: string;
 };
 
