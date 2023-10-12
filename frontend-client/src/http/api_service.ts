@@ -10,7 +10,7 @@ export type AuthorDataType = {
   publicationsInfo: {
     title: string;
     citation: string;
-    pubYear?: string;
+    pub_year?: string;
   }[];
   urlPicture: string;
 };

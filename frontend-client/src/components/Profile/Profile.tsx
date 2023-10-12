@@ -12,6 +12,8 @@ const Profile = (props: { data: AuthorDataType | null }) => {
       <AuthorInformation
         affiliation={props.data?.affiliation}
         citedby={props.data?.citedby}
+        interests={props.data?.interests}
+        publicationsInfo={props.data?.publicationsInfo}
       />
       <div className="chartContainer">
         <LineChartContainer citesPerYear={props.data?.citesPerYear ?? {}} />
