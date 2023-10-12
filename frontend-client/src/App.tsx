@@ -64,7 +64,13 @@ function App() {
           </button>
         </>
       ) : (
-        <Profile data={authorInformation} />
+        <Profile
+          data={authorInformation}
+          handleNewQuery={() => {
+            setShowInfo(false);
+            setAuthorName("");
+          }}
+        />
       )}
     </>
   );

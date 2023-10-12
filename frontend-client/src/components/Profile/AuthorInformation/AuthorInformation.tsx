@@ -6,18 +6,16 @@ const AuthorInformation = ({
   citedby,
   interests,
   publicationsInfo,
+  name,
 }: Partial<AuthorDataType>) => {
   const visualizeInterests = (): JSX.Element => {
     if (interests) {
       return (
-        <div className="interests">
-          {interests?.map((interest, idx) => (
-            <span>
-              {interest}
-              {idx !== interests.length - 1 ? ",  " : ""}
-            </span>
+        <ul className="interests">
+          {interests?.map((interest) => (
+            <li>{interest}</li>
           ))}
-        </div>
+        </ul>
       );
     }
     return <></>;
@@ -43,6 +41,10 @@ const AuthorInformation = ({
     <div className="">
       <div className="mainContainer">
         <p>
+          <b>Author name: </b>
+          {name}
+        </p>
+        <p>
           <b>Affiliations: </b>
           {affiliation}
         </p>
@@ -50,10 +52,12 @@ const AuthorInformation = ({
           <b>Total number of citations: </b>
           {citedby}
         </p>
-        <p>
-          <b>Interests: </b>
+        <div>
+          <p>
+            <b>Interests: </b>
+          </p>
           {visualizeInterests()}
-        </p>
+        </div>
         <div>
           <p>
             <b>Bibliography: </b>

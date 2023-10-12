@@ -1,9 +1,3 @@
-.interests {
-  list-style-type: none;
-  display: flex;
-  flex-direction: row;
-}
-
 .mainContainer {
   text-align: left;
 }

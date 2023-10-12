@@ -13,6 +13,7 @@ export type AuthorDataType = {
     pub_year?: string;
   }[];
   urlPicture: string;
+  name: string;
 };
 
 export const getAuthorInformation = async (
@@ -29,6 +30,7 @@ export const getAuthorInformation = async (
         interests,
         publications,
         url_picture,
+        name,
       } = authorInformation;
 
       const publicationsInfo = publications.map(
@@ -43,6 +45,7 @@ export const getAuthorInformation = async (
         interests,
         publicationsInfo,
         urlPicture: url_picture,
+        name: name,
       };
 
       return authorData;

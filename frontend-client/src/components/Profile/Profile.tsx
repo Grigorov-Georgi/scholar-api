@@ -5,7 +5,10 @@ import "./Profile.css";
 import { LineChartContainer } from "../LineChartContainer/LineChartContainer";
 import BarChart from "../Charts/BarChart";
 
-const Profile = (props: { data: AuthorDataType | null }) => {
+const Profile = (props: {
+  data: AuthorDataType | null;
+  handleNewQuery: () => void;
+}) => {
   return (
     <div className="profile-wrapper">
       <div className="avatar-wrapper">
@@ -15,12 +18,14 @@ const Profile = (props: { data: AuthorDataType | null }) => {
           citedby={props.data?.citedby}
           interests={props.data?.interests}
           publicationsInfo={props.data?.publicationsInfo}
+          name={props.data?.name}
         />
       </div>
       <div className="chartContainer">
         <LineChartContainer citesPerYear={props.data?.citesPerYear ?? {}} />
         <BarChart publicationsData={props.data?.publicationsInfo ?? []} />
       </div>
+      <button onClick={() => props.handleNewQuery()}>New query</button>
     </div>
   );
 };
