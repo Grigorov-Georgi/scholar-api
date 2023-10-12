@@ -5,7 +5,7 @@ const API_URL = "http://localhost:1914/search_author?name=";
 export type AuthorDataType = {
   affiliation: string;
   citedby: number;
-  citesPerYear: Record<string, string>;
+  citesPerYear: { [key: string]: number };
   interests: string[];
   publicationsInfo: {
     pubYear: string;
